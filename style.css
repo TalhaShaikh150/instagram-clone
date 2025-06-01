@@ -60,7 +60,7 @@
    color: #969696;
  }
 
- /*For Signup Page*/
+ /*For Login/Signup Page*/
 
 
  form input {
@@ -104,4 +104,153 @@
 
  .hide {
    display: none;
+ }
+
+
+
+ /*Dashboard*/
+
+
+ .header {
+   justify-content: space-between;
+   display: flex;
+   align-content: center;
+   align-items: center;
+   margin: 30px;
+ }
+
+ .header i {
+   font-size: 1.2em;
+   color: var(--primary-color);
+ }
+
+ .username {
+   color: var(--primary-color);
+   font-size: 1.2em;
+   font-weight: 500;
+ }
+
+ .logout-btn {
+   text-decoration: none;
+   padding: 10px;
+   border: none;
+   border-radius: 5px;
+   font-weight: 500;
+   background-color: var(--primary-color);
+   color: var(--background-color);
+ }
+
+ .logout-btn i {
+   margin-left: 8px;
+   rotate: 180deg;
+   color: var(--background-color);
+ }
+
+ .profile-container {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   margin: 20px;
+   color: var(--primary-color);
+ }
+
+ .profile-border {
+   width: 66px;
+   height: 66px;
+   padding: 3px;
+   border-radius: 50%;
+   background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   position: relative;
+ }
+
+
+ .upload-btn {
+   position: absolute;
+   right: -5px;
+   bottom: -5px;
+   display: inline-block;
+   cursor: pointer;
+ }
+
+ .upload-btn i {
+   border: 2px solid var(--background-color);
+   background-color: var(--primary-color);
+   color: var(--background-color);
+   border-radius: 50px;
+   padding: 8px;
+   pointer-events: none;
+ }
+
+ /* Hide input */
+ .upload-btn input[type="file"] {
+   display: none;
+ }
+
+ .profile-border img {
+   width: 60px;
+   height: 60px;
+   border-radius: 50%;
+   background-color: white;
+ }
+
+ .post-count,
+ .followers,
+ .following {
+   display: flex;
+   text-align: center;
+   flex-direction: column;
+   font-weight: 500;
+
+ }
+
+ .bio {
+   color: var(--primary-color);
+   margin: 20px;
+   display: flex;
+   flex-direction: column;
+   width: 80%;
+   gap: 10px;
+ }
+
+ .bio a {
+   text-decoration: none;
+   color: var(--secondary-color);
+ }
+
+ .post-container {
+   display: grid;
+   margin-top: 10%;
+   margin-bottom: 20%;
+   grid-template-columns: 1fr 1fr 1fr;
+   grid-gap: 2px;
+   /* 3 equal columns */
+   grid-template-rows: auto auto auto;
+
+ }
+
+ .post {
+   width: 120px;
+   height: 120px;
+   background-color: #E0E0E0;
+ }
+
+
+ .navigation {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   background-color: var(--primary-color);
+   position: fixed;
+   width: 100%;
+   height: 8dvh;
+   padding: 0 40px;
+   bottom: 0;
+ }
+
+ .navigation img {
+   width: 30px;
+   height: 30px;
  }

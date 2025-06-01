@@ -3,9 +3,73 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dash Board</title>
+    <title>Instagram Clone</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h2>Dash Board</h2>
+    <div class="header">
+      <p class="username"></p>
+
+      <div>
+        <button class="logout-btn">
+          Log Out <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="profile-container">
+      <div class="profile-border">
+        <img src="assets/profile.png" alt="Profile Picture" />
+        <label class="upload-btn">
+          <i class="fa-solid fa-plus"></i>
+          <input type="file" />
+        </label>
+      </div>
+      <div class="post-count">
+        Posts
+        <span>23</span>
+      </div>
+      <div class="followers">
+        Followers
+        <span>120</span>
+      </div>
+      <div class="following">
+        Following
+        <span>58</span>
+      </div>
+    </div>
+
+    <!--Bio-->
+    <div class="bio">
+      <p class="username"></p>
+      <p>MERN Stack Dev 🚀 | Learning & Building</p>
+      <p>📍 Karachi, Pakistan</p>
+      <div class="flex">
+        🔗
+        <a href="https://developer-talha.netlify.app/" target="_blank">
+          developer-talha.netlify.app
+        </a>
+      </div>
+    </div>
+    <!--All-Post-->
+
+    <div class="post-container">
+      <div class="post"></div>
+      <div class="post"></div>
+      <div class="post"></div>
+      <div class="post"></div>
+    </div>
+
+    <!--Navigation-->
+    <div class="navigation">
+      <img src="assets/home.png" alt="" />
+      <img src="assets/add.png" alt="" />
+      <img src="assets/like.png" alt="" />
+    </div>
+    <script src="scripts/dashboard.js" type="module"></script>
   </body>
 </html>

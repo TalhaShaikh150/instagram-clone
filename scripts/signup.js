@@ -12,6 +12,7 @@ signUpBtn.addEventListener("click", async () => {
     alertMessage.classList.remove("hide");
     return;
   }
+
   alertMessage.classList.add("hide");
   const result = await sendUserDetailsToDb(
     firstName,
@@ -19,7 +20,8 @@ signUpBtn.addEventListener("click", async () => {
     email,
     password
   );
-  alert("Account Created", firstName);
+
+  alert("Account Created");
   window.location = "login.html";
   return result;
 });
