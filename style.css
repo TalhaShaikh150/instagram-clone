@@ -15,14 +15,7 @@
 
  /*For Signup Page*/
 
- form input {
-   padding: 10px 20px;
-   border: none;
-   font-size: 1.4em;
-   color: var(--primary-color);
-   background-color: #121212;
 
- }
 
 
  body {
@@ -43,13 +36,16 @@
    width: 200px;
  }
 
- .login-btn {
+ .btn {
    background-color: var(--secondary-color);
    width: 80%;
+   text-align: center;
+   font-weight: 500;
    border: none;
    border-radius: 5px;
    color: white;
    padding: 10px;
+   text-decoration: none;
    font-size: 1.2em;
  }
 
@@ -67,9 +63,12 @@
  /*For Signup Page*/
 
 
-
  form input {
+   padding: 10px 16px;
+   border: none;
    font-size: 1.2em;
+   color: var(--primary-color);
+   width: 280px;
    background-color: #121212;
  }
 
@@ -78,6 +77,26 @@
    flex-direction: column;
    align-items: center;
    justify-content: center;
-   margin-top: 14px;
-   gap: 14px;
+   margin-top: 20px;
+   gap: 20px;
+ }
+
+ .password-container {
+   position: relative;
+   display: flex;
+   align-items: center;
+ }
+
+ .fa-eye {
+   position: absolute;
+   right: 5%;
+   color: var(--primary-color);
+ }
+
+ .alert-message {
+   color: red;
+ }
+
+ .hide {
+   display: none;
  }
