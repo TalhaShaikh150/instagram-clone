@@ -87,14 +87,19 @@
    align-items: center;
  }
 
- .fa-eye {
+ .fa-eye,
+ .fa-eye-slash {
+   font-size: 1.2em;
    position: absolute;
    right: 5%;
    color: var(--primary-color);
  }
 
+
  .alert-message {
-   color: red;
+   color: #ea3a3a;
+   font-weight: 500;
+   letter-spacing: 1px;
  }
 
  .hide {

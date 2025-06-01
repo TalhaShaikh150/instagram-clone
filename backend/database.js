@@ -22,3 +22,14 @@ export async function sendUserDetailsToDb(
   }
   return data.length > 0 ? data[0] : null;
 }
+
+export async function getUserDetailsFromDb() {
+  const { data, error } = await supabase.from("userDetails").select("*");
+
+  if (error) {
+    console.error("❌Fetching Error:", error.message);
+    return [];
+  }
+
+  return data;
+}

@@ -1,24 +1,14 @@
-import { sendUserDetailsToDb } from "../backend/database.js";
+const viewPasswordBtn = document.querySelector(".fa-eye");
+viewPasswordBtn.addEventListener("click", () => {
+  const password = document.getElementById("password");
 
-const signUpBtn = document.querySelector(".signup-btn");
-
-signUpBtn.addEventListener("click", async () => {
-  const alertMessage = document.querySelector(".alert-message");
-  const firstName = document.getElementById("first-name").value;
-  const lastName = document.getElementById("last-name").value;
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  if (!firstName || !lastName || !email || !password) {
-    alertMessage.classList.remove("hide");
-    return;
+  if (viewPasswordBtn.classList.contains("fa-eye")) {
+    viewPasswordBtn.classList.remove("fa-eye");
+    viewPasswordBtn.classList.add("fa-eye-slash");
+    password.type = "text";
+  } else {
+    password.type = "password";
+    viewPasswordBtn.classList.remove("fa-eye-slash");
+    viewPasswordBtn.classList.add("fa-eye");
   }
-  alertMessage.classList.add("hide");
-  const result = await sendUserDetailsToDb(
-    firstName,
-    lastName,
-    email,
-    password
-  );
-  alert("Account Created", firstName);
-  return result;
 });
