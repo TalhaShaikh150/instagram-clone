@@ -20,6 +20,7 @@ export async function sendUserDetailsToDb(
     console.error("❌ Insert Error:", error.message);
     return null;
   }
+
   return data.length > 0 ? data[0] : null;
 }
 
@@ -32,4 +33,40 @@ export async function getUserDetailsFromDb() {
   }
 
   return data;
+}
+
+//For File Upload
+const postfile = document.querySelector(".post-modal .post-file");
+let userId;
+let shortId;
+export async function sendFileToDb() {
+  const file = postfile.files[0];
+  userId = JSON.parse(localStorage.getItem("userid")) || "Guest";
+  shortId = userId.slice(0, 6);
+  const { data, error } = await supabase.storage
+    .from("userimages")
+    .upload(`${shortId}/${file.name}`, file);
+
+  if (error) {
+    console.log("Insert Error", error.message);
+  }
+
+  return data;
+}
+
+//For Access File
+export async function getFileFromDb() {
+  const file = postfile.files[0];
+
+  const { data, error } = supabase.storage
+    .from("userimages")
+    .getPublicUrl(`${shortId}/${file.name}`);
+
+  if (error) {
+    console.log("Fetch Error", error.message);
+  }
+
+  const publicUrl = data.publicUrl;
+  
+  return publicUrl;
 }

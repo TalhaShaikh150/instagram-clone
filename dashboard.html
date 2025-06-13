@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="overlay hide"></div>
+
     <div class="header">
       <p class="username"></p>
 
@@ -26,7 +28,6 @@
         <img src="assets/profile.png" alt="Profile Picture" />
         <label class="upload-btn">
           <i class="fa-solid fa-plus"></i>
-          <input type="file" />
         </label>
       </div>
       <div class="post-count">
@@ -43,6 +44,15 @@
       </div>
     </div>
 
+    <!--Profile-Modal-->
+
+    <div class="profile-modal hide">
+      <label for="profile"></label>
+      <input type="file" class="profile-pic" id="profile" />
+      <button class="post-profile-btn">Add Pic</button>
+      <button class="back-profile-btn">Back</button>
+    </div>
+
     <!--Bio-->
     <div class="bio">
       <p class="username"></p>
@@ -55,21 +65,30 @@
         </a>
       </div>
     </div>
+
     <!--All-Post-->
+    <div class="post-modal hide">
+      <h3 class="modal-title">Create New Post</h3>
+      <input type="text" class="post-title" placeholder="Enter post title..." />
+      <label for="file"></label>
+      <input type="file" class="post-file" id="file" />
+      <button class="add-post-btn">Add Post</button>
+      <button class="back-post-btn">Back</button>
+    </div>
 
     <div class="post-container">
-      <div class="post"></div>
-      <div class="post"></div>
-      <div class="post"></div>
-      <div class="post"></div>
+      <!-- <div class="post">
+        <img src="assets/" alt="" />
+      </div> -->
     </div>
 
     <!--Navigation-->
     <div class="navigation">
-      <img src="assets/home.png" alt="" />
-      <img src="assets/add.png" alt="" />
-      <img src="assets/like.png" alt="" />
+      <i class="fa-solid fa-house"></i>
+      <i class="fa-solid fa-square-plus show-post-btn"></i>
+      <i class="fa-solid fa-heart"></i>
     </div>
+    <script src="backend/database.js" type="module"></script>
     <script src="scripts/dashboard.js" type="module"></script>
   </body>
 </html>

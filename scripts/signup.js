@@ -1,8 +1,12 @@
 import { sendUserDetailsToDb } from "../backend/database.js";
+import { getUserDetailsFromDb } from "../backend/database.js";
 
 const signUpBtn = document.querySelector(".signup-btn");
+const email = document.getElementById("email").value;
 
-signUpBtn.addEventListener("click", async () => {
+const data = await getUserDetailsFromDb(email, password);
+
+signUpBtn.addEventListener("click", async (e) => {
   const alertMessage = document.querySelector(".alert-message");
   const firstName = document.getElementById("first-name").value;
   const lastName = document.getElementById("last-name").value;
@@ -12,16 +16,38 @@ signUpBtn.addEventListener("click", async () => {
     alertMessage.classList.remove("hide");
     return;
   }
+  if (!email.includes("@gmail.com")) {
+    alertMessage.innerHTML = "add correct email format";
+    alertMessage.style.color = "#cf3e27";
+    alertMessage.classList.remove("hide");
+    return;
+  }
 
-  alertMessage.classList.add("hide");
-  const result = await sendUserDetailsToDb(
-    firstName,
-    lastName,
-    email,
-    password
-  );
+  let isUser = false; //true after one wrong email
 
-  alert("Account Created");
-  window.location = "login.html";
-  return result;
+  data.forEach((userData) => {
+    if (userData.email.includes(email)) {
+      alertMessage.innerHTML = "Email Already Exist";
+      alertMessage.classList.remove("hide");
+      isUser = true;
+    }
+  });
+
+  if (!isUser) {
+    alertMessage.classList.add("hide");
+    const result = await sendUserDetailsToDb(
+      firstName,
+      lastName,
+      email,
+      password
+    );
+    alertMessage.innerHTML = "Account Created Successfully";
+    alertMessage.style.color = "#1ca317";
+    alertMessage.classList.remove("hide");
+    setTimeout(() => {
+      window.location = "login.html";
+      isUser = false;
+      return result;
+    }, 800);
+  }
 });
