@@ -4,8 +4,10 @@ import {
   getFileFromDb,
   supabase,
 } from "../backend/database.js";
+
 let userId;
-async function renderUserDetails() {
+
+export async function renderUserDetails() {
   const userName = document.querySelectorAll(".username");
   const data = await getUserDetailsFromDb();
   for (let i = 0; i < data.length; i++) {
@@ -15,6 +17,7 @@ async function renderUserDetails() {
       userName.forEach((name) => {
         name.innerHTML = fullName;
       });
+      return data[i].firstName;
     }
   }
 }
@@ -55,11 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
     overlay.classList.add("hide");
 
     // const file = postfile.files[0];
-   
 
     async function render() {
       await sendFileToDb();
-
+      console.log(userId);
       const databasefile = await getFileFromDb();
 
       let html = `
@@ -67,10 +69,11 @@ document.addEventListener("DOMContentLoaded", () => {
       <img src="${databasefile}" class="all-images" alt="" />
       </div>
       `;
+      console.log(databasefile)
       postContainer.innerHTML += html;
       postTitle.value = "";
       postfile.value = "";
-              }
+    }
     render();
   });
 
@@ -83,25 +86,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // To Add Profile
   let addProfile = document.querySelector(".upload-btn");
-  const postProfileBtn = document.querySelector('.post-profile-btn')
-  const backProfileModal = document.querySelector('.back-profile-btn')
-  const postProfile = document.querySelector('.profile-pic')
-  const profileModal = document.querySelector(".profile-modal")
-  
-  addProfile.addEventListener("click",() => {
-    profileModal.classList.remove('hide')
-    
-    postProfileBtn.addEventListener('click',()=>{
-      const profilePic = postProfile.files[0]
-      console.log(profilePic.name)
-    })
+  const postProfileBtn = document.querySelector(".post-profile-btn");
+  const backProfileModal = document.querySelector(".back-profile-btn");
+  const postProfile = document.querySelector(".profile-pic");
+  const profileModal = document.querySelector(".profile-modal");
 
-    backProfileModal.addEventListener('click',()=>{
-      profileModal.classList.add('hide')
-    })
+  addProfile.addEventListener("click", async () => {
+    profileModal.classList.remove("hide");
 
+    postProfileBtn.addEventListener("click", () => {
+      const profilePic = postProfile.files[0];
+      console.log(profilePic.name);
+      sendFileToDb();
+    });
+
+    backProfileModal.addEventListener("click", () => {
+      profileModal.classList.add("hide");
+    });
   });
-
 });
-
-

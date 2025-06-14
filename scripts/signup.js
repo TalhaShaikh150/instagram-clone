@@ -6,7 +6,7 @@ const email = document.getElementById("email").value;
 
 const data = await getUserDetailsFromDb(email, password);
 
-signUpBtn.addEventListener("click", async (e) => {
+signUpBtn.addEventListener("click", async () => {
   const alertMessage = document.querySelector(".alert-message");
   const firstName = document.getElementById("first-name").value;
   const lastName = document.getElementById("last-name").value;

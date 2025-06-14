@@ -1,10 +1,10 @@
+import { renderUserDetails } from "../scripts/dashboard.js";
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 const supabaseUrl = "https://qkfpksymvoyepsbbfpmq.supabase.co";
 const supabaseKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFrZnBrc3ltdm95ZXBzYmJmcG1xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg3OTU5NzQsImV4cCI6MjA2NDM3MTk3NH0.dOSrNcPAMBXkcEDfsLCzXoX1uWhiHCaJLpizQUuB1i8";
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
-
 export async function sendUserDetailsToDb(
   firstName,
   lastName,
@@ -35,17 +35,21 @@ export async function getUserDetailsFromDb() {
   return data;
 }
 
+//Fetching UserDetails From dashboard.js To add On Stoarage Bucket Folder On Supabase
+
+const firstName = await renderUserDetails();
+
 //For File Upload
-const postfile = document.querySelector(".post-modal .post-file");
+const postfile = document.querySelector(".post-file");
 let userId;
 let shortId;
 export async function sendFileToDb() {
   const file = postfile.files[0];
   userId = JSON.parse(localStorage.getItem("userid")) || "Guest";
-  shortId = userId.slice(0, 6);
+  shortId = userId.slice(0, 3);
   const { data, error } = await supabase.storage
     .from("userimages")
-    .upload(`${shortId}/${file.name}`, file);
+    .upload(`${firstName}${shortId}/${file.name}`, file);
 
   if (error) {
     console.log("Insert Error", error.message);
@@ -60,13 +64,13 @@ export async function getFileFromDb() {
 
   const { data, error } = supabase.storage
     .from("userimages")
-    .getPublicUrl(`${shortId}/${file.name}`);
+    .getPublicUrl(`${firstName}${shortId}/${file.name}`);
 
   if (error) {
     console.log("Fetch Error", error.message);
   }
 
   const publicUrl = data.publicUrl;
-  
+
   return publicUrl;
 }
