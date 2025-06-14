@@ -41,25 +41,65 @@ const firstName = await renderUserDetails();
 
 //For File Upload
 const postfile = document.querySelector(".post-file");
-let userId;
-let shortId;
-export async function sendFileToDb() {
+const postProfile = document.querySelector(".profile-pic");
+
+let userId = JSON.parse(localStorage.getItem("userid")) || "Guest";
+
+let shortId = userId.slice(0, 3);
+
+export async function sendProfileToDb() {
+  const profile = postProfile.files[0];
+  if (!profile) {
+    console.error("No profile file selected.");
+    return null;
+  }
+
+  const { data, error } = await supabase.storage
+    .from("userimages")
+    .upload(`${firstName}${shortId}/profile-${profile.name}`, profile);
+
+  if (error) {
+    console.error("Profile Upload Error:", error.message);
+    return null;
+  }
+  return data;
+}
+//For Fetching Profile Pic From Database
+
+export async function getProfileFromDb() {
+  const profile = postProfile.files[0];
+  const { data, error } = await supabase.storage
+    .from("userimages")
+    .getPublicUrl(`${firstName}${shortId}/profile-${profile.name}`, profile);
+
+  if (error) {
+    console.error("Profile Pic Fetching", error.message);
+  }
+  const publicUrl = data.publicUrl;
+
+  return publicUrl;
+}
+
+export async function sendPostToDb() {
   const file = postfile.files[0];
-  userId = JSON.parse(localStorage.getItem("userid")) || "Guest";
-  shortId = userId.slice(0, 3);
+  if (!file) {
+    console.error("No file selected.");
+    return null;
+  }
+
   const { data, error } = await supabase.storage
     .from("userimages")
     .upload(`${firstName}${shortId}/${file.name}`, file);
 
   if (error) {
-    console.log("Insert Error", error.message);
+    console.error("File Upload Error:", error.message);
+    return null;
   }
-
-  return data;
+  return data
 }
 
-//For Access File
-export async function getFileFromDb() {
+//For Fetching Post From Database
+export async function getPostFromDb() {
   const file = postfile.files[0];
 
   const { data, error } = supabase.storage

@@ -1,7 +1,9 @@
 import {
   getUserDetailsFromDb,
-  sendFileToDb,
-  getFileFromDb,
+  sendProfileToDb,
+  getProfileFromDb,
+  sendPostToDb,
+  getPostFromDb,
   supabase,
 } from "../backend/database.js";
 
@@ -43,7 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // For Add Post
-
+  let postCount = 0;
+  const postCountElement = document.querySelector(".post-count");
   const postTitle = document.querySelector(".post-modal .post-title");
   const postfile = document.querySelector(".post-modal .post-file");
   const addPostBtn = document.querySelector(".post-modal .add-post-btn");
@@ -60,16 +63,16 @@ document.addEventListener("DOMContentLoaded", () => {
     // const file = postfile.files[0];
 
     async function render() {
-      await sendFileToDb();
-      console.log(userId);
-      const databasefile = await getFileFromDb();
+      await sendPostToDb();
+      const databasefile = await getPostFromDb();
 
       let html = `
       <div class="post">
       <img src="${databasefile}" class="all-images" alt="" />
       </div>
       `;
-      console.log(databasefile)
+      postCount++;
+      postCountElement.innerHTML = postCount;
       postContainer.innerHTML += html;
       postTitle.value = "";
       postfile.value = "";
@@ -90,18 +93,33 @@ document.addEventListener("DOMContentLoaded", () => {
   const backProfileModal = document.querySelector(".back-profile-btn");
   const postProfile = document.querySelector(".profile-pic");
   const profileModal = document.querySelector(".profile-modal");
-
+  const profileImage = document.querySelector(".profile");
+  //To Show Profile Modal
   addProfile.addEventListener("click", async () => {
+    overlay.classList.remove("hide");
     profileModal.classList.remove("hide");
+  });
 
-    postProfileBtn.addEventListener("click", () => {
-      const profilePic = postProfile.files[0];
-      console.log(profilePic.name);
-      sendFileToDb();
-    });
+  //To Post Profile Image
+  postProfileBtn.addEventListener("click", async () => {
+    if (!postProfile.value) {
+      alert("Select Image");
+      return;
+    }
+    async function render() {
+      sendProfileToDb();
+      const databasefile = await getProfileFromDb();
 
-    backProfileModal.addEventListener("click", () => {
+      profileImage.src = databasefile;
+      overlay.classList.add("hide");
       profileModal.classList.add("hide");
-    });
+    }
+    render();
+  });
+
+  //To Hide Profile Modal
+  backProfileModal.addEventListener("click", () => {
+    profileModal.classList.add("hide");
+    overlay.classList.add("hide");
   });
 });

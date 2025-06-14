@@ -23,7 +23,6 @@
    height: 100% !important;
    top: 0;
    left: 0;
-   z-index: 1;
  }
 
  body {
@@ -161,6 +160,7 @@
  }
 
  .profile-border {
+  border: none;
    width: 66px;
    height: 66px;
    padding: 3px;
@@ -174,6 +174,7 @@
 
 
  .upload-btn {
+  border: none;
    position: absolute;
    right: -5px;
    bottom: -5px;
@@ -202,7 +203,7 @@
    background-color: white;
  }
 
- .post-count,
+ .posts,
  .followers,
  .following {
    display: flex;
@@ -273,7 +274,8 @@
    color: var(--primary-color);
  }
 
- .post-modal {
+ .post-modal,
+ .profile-modal {
    position: absolute;
    display: flex;
    flex-direction: column;
