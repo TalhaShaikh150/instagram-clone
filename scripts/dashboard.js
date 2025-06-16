@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  if (window.location.pathname === "/dashboard.html") {
+  if (window.location.pathname.endsWith("/dashboard.html") {
     // For Logout
     const logOutBtn = document.querySelector(".logout-btn");
     logOutBtn.addEventListener("click", () => {
