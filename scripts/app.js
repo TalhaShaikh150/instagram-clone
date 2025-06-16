@@ -12,3 +12,4 @@ viewPasswordBtn.addEventListener("click", () => {
     viewPasswordBtn.classList.add("fa-eye");
   }
 });
+

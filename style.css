@@ -8,9 +8,13 @@
  }
 
  :root {
-   --background-color: #121212;
+   --background-color: #161616;
    --primary-color: #FFFFFF;
    --secondary-color: #3797EF;
+ }
+
+ body {
+   background-color: var(--background-color);
  }
 
  /*For Signup Page*/
@@ -23,14 +27,11 @@
    height: 100% !important;
    top: 0;
    left: 0;
- }
-
- body {
-   background-color: var(--background-color);
-   overflow: hidden;
+   z-index: 2;
  }
 
  main {
+   background-color: var(--background-color);
    display: flex;
    align-items: center;
    justify-content: center;
@@ -114,8 +115,8 @@
  }
 
 
-
  /*Dashboard*/
+
  .header {
    justify-content: space-between;
    display: flex;
@@ -160,7 +161,7 @@
  }
 
  .profile-border {
-  border: none;
+   border: none;
    width: 66px;
    height: 66px;
    padding: 3px;
@@ -174,7 +175,7 @@
 
 
  .upload-btn {
-  border: none;
+   border: none;
    position: absolute;
    right: -5px;
    bottom: -5px;
@@ -258,7 +259,6 @@
    border: 3px solid #969696;
    width: calc(33.333% - 2px);
    aspect-ratio: 1 / 1;
-   background-color: #E0E0E0;
    margin-right: 1px;
    margin-bottom: 1px;
    box-sizing: border-box;
@@ -321,7 +321,8 @@
    opacity: 0;
    overflow: hidden;
    position: absolute;
-   z-index: -1;
+   object-fit: cover;
+
  }
 
  label[for="file"],

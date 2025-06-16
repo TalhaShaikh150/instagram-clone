@@ -5,8 +5,16 @@ const signUpBtn = document.querySelector(".signup-btn");
 const email = document.getElementById("email").value;
 
 const data = await getUserDetailsFromDb(email, password);
-
 signUpBtn.addEventListener("click", async () => {
+
+    const form = document.querySelector("form");
+
+  // Check native HTML5 validation first
+  if (!form.checkValidity()) {
+    form.reportValidity(); // shows the native validation message
+    return;
+  }
+
   const alertMessage = document.querySelector(".alert-message");
   const firstName = document.getElementById("first-name").value;
   const lastName = document.getElementById("last-name").value;
@@ -16,6 +24,7 @@ signUpBtn.addEventListener("click", async () => {
     alertMessage.classList.remove("hide");
     return;
   }
+
   if (!email.includes("@gmail.com")) {
     alertMessage.innerHTML = "add correct email format";
     alertMessage.style.color = "#cf3e27";

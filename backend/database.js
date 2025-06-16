@@ -37,15 +37,11 @@ export async function getUserDetailsFromDb() {
 
 //Fetching UserDetails From dashboard.js To add On Stoarage Bucket Folder On Supabase
 
-const firstName = await renderUserDetails();
+const email = await renderUserDetails();
 
 //For File Upload
 const postfile = document.querySelector(".post-file");
 const postProfile = document.querySelector(".profile-pic");
-
-let userId = JSON.parse(localStorage.getItem("userid")) || "Guest";
-
-let shortId = userId.slice(0, 3);
 
 export async function sendProfileToDb() {
   const profile = postProfile.files[0];
@@ -56,7 +52,7 @@ export async function sendProfileToDb() {
 
   const { data, error } = await supabase.storage
     .from("userimages")
-    .upload(`${firstName}${shortId}/profile-${profile.name}`, profile);
+    .upload(`${email}/profile-${profile.name}`, profile);
 
   if (error) {
     console.error("Profile Upload Error:", error.message);
@@ -68,9 +64,10 @@ export async function sendProfileToDb() {
 
 export async function getProfileFromDb() {
   const profile = postProfile.files[0];
+
   const { data, error } = await supabase.storage
     .from("userimages")
-    .getPublicUrl(`${firstName}${shortId}/profile-${profile.name}`, profile);
+    .getPublicUrl(`${email}/profile-${profile.name}`, profile);
 
   if (error) {
     console.error("Profile Pic Fetching", error.message);
@@ -89,13 +86,13 @@ export async function sendPostToDb() {
 
   const { data, error } = await supabase.storage
     .from("userimages")
-    .upload(`${firstName}${shortId}/${file.name}`, file);
+    .upload(`${email}/${file.name}`, file);
 
   if (error) {
     console.error("File Upload Error:", error.message);
     return null;
   }
-  return data
+  return data;
 }
 
 //For Fetching Post From Database
@@ -104,7 +101,7 @@ export async function getPostFromDb() {
 
   const { data, error } = supabase.storage
     .from("userimages")
-    .getPublicUrl(`${firstName}${shortId}/${file.name}`);
+    .getPublicUrl(`${email}/${file.name}`);
 
   if (error) {
     console.log("Fetch Error", error.message);
@@ -114,3 +111,23 @@ export async function getPostFromDb() {
 
   return publicUrl;
 }
+
+export async function sendProfileSrc(email, src) {
+  const { data, error } = await supabase
+    .from("profileSrc")
+    .insert([{ email, src }])
+    .select();
+
+  if (error) {
+    console.error("❌ Insert Error:", error.message);
+    return null;
+  }
+
+  return data.length > 0 ? data[0] : null;
+}
+
+export async function getProfileSrc(){
+  const {data,error} = await supabase.from('profileSrc').select('*')
+  return data
+}
+

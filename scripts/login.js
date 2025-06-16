@@ -1,7 +1,12 @@
 import { getUserDetailsFromDb } from "../backend/database.js";
-
+const form = document.querySelector("form");
 const loginBtn = document.querySelector(".login-btn");
 loginBtn.addEventListener("click", async () => {
+  // Check native HTML5 validation first
+  if (!form.checkValidity()) {
+    form.reportValidity(); // shows the native validation message
+    return;
+  }
   const alertMessage = document.querySelector(".alert-message");
 
   const email = document.getElementById("email").value;
@@ -19,15 +24,9 @@ loginBtn.addEventListener("click", async () => {
       break;
     }
   }
-if (!email.includes("@gmail.com")) {
-    alertMessage.innerHTML = "add correct email format";
-    alertMessage.style.color = "#cf3e27";
-    alertMessage.classList.remove("hide");
-    return;
-  }
+
   if (!found) {
     alertMessage.innerHTML = "Invalid Email or Password";
     alertMessage.classList.remove("hide");
   }
-  
 });
